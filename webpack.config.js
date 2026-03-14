@@ -1,6 +1,7 @@
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const { sentryWebpackPlugin } = require('@sentry/webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
+const path = require('path');
 
 const circularPlugin = new CircularDependencyPlugin({
   // exclude detection of files based on a RegExp
@@ -63,6 +64,7 @@ module.exports = (env) => {
     resolve: { extensions: ['*', '.js', '.jsx', '.ts', '.tsx'] },
     output: {
       filename: 'bundle.js',
+      path: path.resolve(__dirname, 'dist'),
     },
     devServer: {
       port: 3000,
