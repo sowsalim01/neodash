@@ -1,0 +1,8 @@
+# Ignore everything except dist and necessary files
+*
+!dist
+!dist/**
+!package.json
+!vercel.json
+!scripts
+!scripts/**
