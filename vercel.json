@@ -1,7 +1,7 @@
 {
   "buildCommand": "./build-vercel.sh",
   "outputDirectory": "dist",
-  "installCommand": "npm install --legacy-peer-deps",
+  "installCommand": "npm install",
   "framework": null,
   "rewrites": [
     {
