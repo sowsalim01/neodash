@@ -27,6 +27,7 @@
     "build": "npx webpack --mode production --env production && node scripts/build.js",
     "build:npm": "npx webpack --mode production --env production && node scripts/build.js",
     "build-minimal": "yarn webpack --mode production --env production && cp -r public/* dist/",
+    "start": "npm run build && npx serve dist -p 10000",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "lint": "eslint --ext .ts --ext .tsx .",
     "lint-staged": "lint-staged --config .lintstagedrc.json",

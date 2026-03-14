@@ -1,0 +1,13 @@
+services:
+  # Static Site
+  - type: web
+    name: neodash
+    env: static
+    buildCommand: "npm install --legacy-peer-deps && npm run build"
+    staticPublishPath: dist
+    routes:
+      - route: /(.*)
+        path: /index.html
+    envVars:
+      - key: NODE_ENV
+        value: production
