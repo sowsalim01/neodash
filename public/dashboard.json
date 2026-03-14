@@ -1,0 +1,279 @@
+{
+  "title": "Tableau de bord démographique des régions du Sénégal",
+  "version": "2.4",
+  "settings": {
+    "pagenumber": 0,
+    "editable": true,
+    "fullscreenEnabled": false,
+    "parameters": {},
+    "theme": "light"
+  },
+  "pages": [
+    {
+      "title": "Première page",
+      "reports": [
+        {
+          "id": "165c957f-4fdb-4f14-b0a7-4d0914df9fa6",
+          "title": "Nb Régions",
+          "query": "MATCH (r:Region)\nRETURN count(r) AS Nombre_Regions",
+          "width": 4,
+          "height": 2,
+          "x": 0,
+          "y": 0,
+          "type": "value",
+          "selection": {},
+          "settings": {},
+          "schema": []
+        },
+        {
+          "id": "05aaf0ce-da52-4343-882d-06168e46a588",
+          "title": "Répartition de la population des régions du Sénégal",
+          "query": "MATCH (r:Region)-[p:A_POPULATION]->(a:Annee {valeur:2023})\nRETURN\nr.nom AS region,\np.totale AS population\nORDER BY population DESC",
+          "width": 12,
+          "height": 4,
+          "x": 12,
+          "y": 2,
+          "type": "bar",
+          "selection": {
+            "index": "region",
+            "value": "population",
+            "key": "(none)"
+          },
+          "settings": {},
+          "schema": []
+        },
+        {
+          "id": "8bf71576-40c8-47de-b089-38686fbf11f5",
+          "title": "Répartition de la densité de population dans les régions",
+          "query": "MATCH (r:Region)-[p:A_POPULATION]->(a:Annee {valeur:2023})\nRETURN\nr.nom AS region,\np.densite AS densite\nORDER BY densite DESC",
+          "width": 12,
+          "height": 4,
+          "x": 0,
+          "y": 2,
+          "type": "bar",
+          "selection": {
+            "index": "region",
+            "value": "densite",
+            "key": "(none)"
+          },
+          "settings": {},
+          "schema": []
+        },
+        {
+          "id": "e758aea9-631d-4482-8d68-a6a863ec03c0",
+          "title": "Densité moyenne",
+          "query": "MATCH (:Region)-[p:A_POPULATION]->(a:Annee {valeur:2023})\nRETURN max(p.densite) AS Densite_Max",
+          "width": 6,
+          "height": 2,
+          "x": 11,
+          "y": 0,
+          "type": "value",
+          "selection": {},
+          "settings": {},
+          "schema": []
+        },
+        {
+          "id": "437650b9-9f69-4511-a5da-7a684444995c",
+          "title": "Hommes",
+          "query": "MATCH (r:Region)-[p:A_POPULATION]->(a:Annee {valeur:2023})\nRETURN\nr.nom AS region,\np.hommes AS hommes,\np.femmes AS femmes",
+          "width": 7,
+          "height": 3,
+          "x": 9,
+          "y": 10,
+          "type": "bar",
+          "selection": {
+            "index": "region",
+            "value": "hommes",
+            "key": "(none)"
+          },
+          "settings": {},
+          "schema": []
+        },
+        {
+          "id": "9785dfb3-c2c6-4d07-ac94-525882081fd0",
+          "title": "Population Sénégal en 2023",
+          "query": "MATCH (:Region)-[p:A_POPULATION]->(a:Annee {valeur:2023})\nRETURN sum(p.hommes) AS Hommes_Total",
+          "width": 7,
+          "height": 2,
+          "x": 4,
+          "y": 0,
+          "type": "value",
+          "selection": {},
+          "settings": {},
+          "schema": []
+        },
+        {
+          "id": "ce4b273f-970d-4d45-b849-ca2934351d9a",
+          "title": "Population région plus peuplée",
+          "query": "MATCH (r:Region)-[p:A_POPULATION]->(a:Annee {valeur:2023})\nRETURN p.totale AS Population_Max\nORDER BY Population_Max DESC\nLIMIT 1",
+          "width": 7,
+          "height": 2,
+          "x": 17,
+          "y": 0,
+          "type": "value",
+          "selection": {},
+          "settings": {},
+          "schema": []
+        },
+        {
+          "id": "cd4f06a7-8333-4e5e-986d-2a8e8fb1a28c",
+          "title": "Hommes et Femmes",
+          "query": "MATCH (r:Region {nom:'Dakar'})-[p:A_POPULATION]->(a:Annee {valeur:2023})\nRETURN 'Hommes' AS Sexe, p.hommes AS Population\nUNION\nMATCH (r:Region {nom:'Dakar'})-[p:A_POPULATION]->(a:Annee {valeur:2023})\nRETURN 'Femmes' AS Sexe, p.femmes AS Population",
+          "width": 8,
+          "height": 3,
+          "x": 16,
+          "y": 10,
+          "type": "pie",
+          "selection": {
+            "index": "Sexe",
+            "value": "Population",
+            "key": "(none)"
+          },
+          "settings": {},
+          "schema": []
+        },
+        {
+          "id": "b8f8992e-2435-4450-acd6-49bf24b66d1a",
+          "title": "Population des régions",
+          "query": "MATCH (r:Region)-[p:A_POPULATION]->(a:Annee {valeur:2023})\nRETURN\ndistinct(r.nom) AS Region,\np.totale AS Population\nORDER BY Population DESC",
+          "width": 8,
+          "height": 4,
+          "x": 16,
+          "y": 6,
+          "type": "pie",
+          "selection": {
+            "index": "Region",
+            "value": "Population",
+            "key": "(none)"
+          },
+          "settings": {},
+          "schema": []
+        },
+        {
+          "id": "30986991-0502-465f-8d87-2d25f41561e5",
+          "title": "Tableau de quelques statistiques des régions",
+          "query": "MATCH (r:Region)-[p:A_POPULATION]->(a:Annee {valeur:2023})\nRETURN\ndistinct(r.nom) AS Region,\nr.latitude AS Latitude,\nr.longitude AS Longitude,\np.totale AS Population_Totale,\np.hommes AS Hommes,\np.femmes AS Femmes,\np.densite AS Densite,\np.taux_urbain AS Taux_Urbain,\np.taux_croissance AS Taux_Croissance\nORDER BY Population_Totale DESC",
+          "width": 16,
+          "height": 4,
+          "x": 0,
+          "y": 6,
+          "type": "table",
+          "selection": {},
+          "settings": {}
+        },
+        {
+          "id": "177e84e7-2f34-4dea-ad86-232692ea46b1",
+          "title": "",
+          "query": "MATCH p=()-[:POSSEDE_INDICATEUR]->() RETURN p limit 25;",
+          "width": 9,
+          "height": 4,
+          "x": 0,
+          "y": 10,
+          "type": "graph",
+          "selection": {
+            "Region": "nom",
+            "Indicateur": "(label)"
+          },
+          "settings": {},
+          "schema": [
+            [
+              "Region",
+              "population_2023",
+              "latitude",
+              "geom_wkt",
+              "pourcentage_hommes",
+              "pourcentage_femmes",
+              "id",
+              "nom",
+              "superficie_km2",
+              "longitude"
+            ],
+            [
+              "Indicateur",
+              "unite",
+              "description",
+              "type"
+            ]
+          ]
+        },
+        {
+          "id": "1733365a-d5de-4759-b147-06fc960563cd",
+          "title": "",
+          "query": "MATCH p=()-[:MESURE_POUR]->() RETURN p LIMIT 25;\n\n\n",
+          "width": 6,
+          "height": 4,
+          "x": 9,
+          "y": 13,
+          "type": "graph",
+          "selection": {
+            "Indicateur": "(label)",
+            "Annee": "(label)"
+          },
+          "settings": {},
+          "schema": [
+            [
+              "Indicateur",
+              "unite",
+              "description",
+              "type"
+            ],
+            [
+              "Annee",
+              "valeur",
+              "periode"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Seconde page",
+      "reports": [
+        {
+          "id": "55b1399d-2673-4252-a726-e9d0038eeb57",
+          "title": "",
+          "query": "MATCH (r:Region)-[p:A_POPULATION]->(a:Annee)\nWHERE r.nom IN [\"Dakar\",\"Thiès\",\"Saint-Louis\"]\nRETURN\nr.nom AS Region,\na.valeur AS Annee,\np.totale AS Population\nORDER BY a.valeur",
+          "width": 12,
+          "height": 3,
+          "x": 0,
+          "y": 0,
+          "type": "line",
+          "selection": {
+            "x": "Annee",
+            "value": []
+          },
+          "settings": {},
+          "schema": []
+        }
+      ]
+    }
+  ],
+  "parameters": {},
+  "extensions": {
+    "active": true,
+    "activeReducers": [
+      "DASHBOARD/EXTENSIONS/QUERY_TRANSLATOR/"
+    ],
+    "advanced-charts": {
+      "active": true
+    },
+    "styling": {
+      "active": true
+    },
+    "actions": {
+      "active": true
+    },
+    "query-translator": {
+      "active": true,
+      "modelProvider": "OpenAI",
+      "settings": {}
+    },
+    "forms": {
+      "active": true
+    },
+    "access-control-management": {
+      "active": true
+    }
+  },
+  "uuid": "132bca02-43d1-4059-9301-48a57fba9e93"
+}
