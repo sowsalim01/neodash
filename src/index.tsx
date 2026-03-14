@@ -41,6 +41,10 @@ const persister = persistStore(store);
 
 await StyleConfig.getInstance();
 
+const NEO4J_URI = process.env.NEO4J_URI;
+const NEO4J_USERNAME = process.env.NEO4J_USERNAME;
+const NEO4J_PASSWORD = process.env.NEO4J_PASSWORD;
+
 /** Wrap the application in a redux provider / browser cache persistance gate **/
 const provider = (
   <ReduxProvider store={store}>
