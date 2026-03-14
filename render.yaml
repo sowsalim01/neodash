@@ -3,7 +3,7 @@ services:
   - type: web
     name: neodash
     env: static
-    buildCommand: "npm install --legacy-peer-deps && npm run build"
+    buildCommand: "yarn install --frozen-lockfile=false && yarn build"
     staticPublishPath: dist
     routes:
       - route: /(.*)
