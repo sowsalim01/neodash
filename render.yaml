@@ -3,7 +3,7 @@ services:
   - type: web
     name: neodash
     env: static
-    buildCommand: "yarn install && yarn build"
+    buildCommand: "./build-render.sh"
     staticPublishPath: dist
     routes:
       - route: /(.*)
