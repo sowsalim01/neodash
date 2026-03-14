@@ -3,7 +3,7 @@ services:
   - type: web
     name: neodash
     env: static
-    buildCommand: "yarn install --frozen-lockfile=false && yarn build"
+    buildCommand: "yarn install && yarn build"
     staticPublishPath: dist
     routes:
       - route: /(.*)

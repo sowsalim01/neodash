@@ -24,7 +24,7 @@
     "dev": "yarn webpack-dev-server --mode development",
     "prod": "yarn webpack-dev-server --mode production",
     "debug": "yarn --node-options='--inspect' webpack-dev-server --mode development",
-    "build": "yarn webpack --mode production --env production && node scripts/build.js",
+    "build": "./node_modules/.bin/webpack --mode production --env production && node scripts/build.js",
     "build:npm": "npx webpack --mode production --env production && node scripts/build.js",
     "build-minimal": "yarn webpack --mode production --env production && cp -r public/* dist/",
     "start": "npm run build && npx serve dist -p 10000",
