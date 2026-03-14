@@ -55,7 +55,7 @@ module.exports = (env) => {
     experiments: {
       topLevelAwait: true,
     },
-    entry: ['./src/index.tsx'],
+    entry: path.resolve(__dirname, 'src/index.tsx'),
     mode: production ? 'production' : 'development',
     devtool: production ? 'source-map' : 'eval-cheap-module-source-map',
     module: {
