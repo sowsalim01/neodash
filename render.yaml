@@ -1,13 +1,11 @@
 services:
-  # Static Site
   - type: web
     name: neodash
     env: static
-    buildCommand: "./build-render.sh"
+    repo: https://github.com/sowsalim01/neodash.git
+    rootDir: .
+    buildCommand: chmod +x build-render.sh && ./build-render.sh
     staticPublishPath: dist
     routes:
       - route: /(.*)
         path: /index.html
-    envVars:
-      - key: NODE_ENV
-        value: production
